@@ -28,6 +28,8 @@ services:
       resources:
         limits:
           memory: 2G
+      placement:
+        constraints: [node.role == worker]
 
   es02:
     image: jeduoliveira/labs:elasticsearch-7.9.2
@@ -57,6 +59,8 @@ services:
       resources:
         limits:
           memory: 2G
+      placement:
+        constraints: [node.role == worker]
 
   es03:
     image: jeduoliveira/labs:elasticsearch-7.9.2
@@ -86,6 +90,8 @@ services:
       resources:
         limits:
           memory: 2G
+      placement:
+        constraints: [node.role == worker]
 
   kib01:
     image: docker.elastic.co/kibana/kibana:7.9.2
@@ -102,6 +108,8 @@ services:
       timeout: 10s
       retries: 10
       start_period: 40s
+    placement:
+      constraints: [node.role == manager]
 
 volumes:
   data01:    
