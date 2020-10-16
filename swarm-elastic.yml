@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   es01:
     image: jeduoliveira/labs:elasticsearch-7.9.2
