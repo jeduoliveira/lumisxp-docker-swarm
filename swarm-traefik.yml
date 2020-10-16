@@ -17,11 +17,11 @@ services:
       restart_policy:
         condition: any
       mode: replicated
-      replicas: 1
+      replicas: 3
       update_config:
         delay: 2s
       placement:
-         constraints: [node.role == manager]
+         constraints: [node.role == worker]
     networks:
       - net
 
