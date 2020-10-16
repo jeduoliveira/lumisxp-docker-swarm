@@ -1,0 +1,114 @@
+version: '3.8'
+services:
+  es01:
+    image: jeduoliveira/labs:elasticsearch-7.9.2
+    build: docker/elasticsearch
+    environment:
+      - node.name=es01
+      - cluster.name=lumisportal
+      - discovery.seed_hosts=es02,es03
+      - cluster.initial_master_nodes=es01,es02,es03      
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+      - action.auto_create_index=-lumisportal-*,+* 
+      - search.max_buckets=30000
+      - search.max_open_scroll_context=100000      
+    volumes:
+      - type: volume 
+        source: data01
+        target: /usr/share/elasticsearch/data
+      - type: volume 
+        source: es_analysis
+        target: /usr/share/elasticsearch/config/lumis-analysis     
+    networks:
+      - net
+    deploy:            
+      mode: "replicated"
+      replicas: 1
+      resources:
+        limits:
+          memory: 2G
+
+  es02:
+    image: jeduoliveira/labs:elasticsearch-7.9.2
+    build: docker/elasticsearch
+    environment:
+      - node.name=es02
+      - cluster.name=lumisportal
+      - discovery.seed_hosts=es01,es03
+      - cluster.initial_master_nodes=es01,es02,es03      
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+      - action.auto_create_index=-lumisportal-*,+* 
+      - search.max_buckets=30000
+      - search.max_open_scroll_context=100000
+    volumes:
+      - type: volume 
+        source: data02
+        target: /usr/share/elasticsearch/data
+      - type: volume 
+        source: es_analysis
+        target: /usr/share/elasticsearch/config/lumis-analysis     
+    networks:
+      - net
+    deploy:            
+      mode: "replicated"
+      replicas: 1
+      resources:
+        limits:
+          memory: 2G
+
+  es03:
+    image: jeduoliveira/labs:elasticsearch-7.9.2
+    build: docker/elasticsearch
+    environment:
+      - node.name=es03
+      - cluster.name=lumisportal
+      - discovery.seed_hosts=es01,es02
+      - cluster.initial_master_nodes=es01,es02,es03      
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+      - action.auto_create_index=-lumisportal-*,+* 
+      - search.max_buckets=30000
+      - search.max_open_scroll_context=100000
+    volumes:
+      - type: volume 
+        source: data03
+        target: /usr/share/elasticsearch/data
+      - type: volume 
+        source: es_analysis
+        target: /usr/share/elasticsearch/config/lumis-analysis      
+    networks:
+      - net
+    deploy:            
+      mode: "replicated"
+      replicas: 1
+      resources:
+        limits:
+          memory: 2G
+
+  kib01:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es01:9200
+      ELASTICSEARCH_HOSTS: http://es01:9200
+    networks:
+      - net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5601"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
+volumes:
+  data01:    
+  data02:    
+  data03:
+  es_analysis:
+
+networks:
+  net:
+    external: true

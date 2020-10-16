@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+  lumisportal:
+    image: jeduoliveira/labs:lumisxp-12.5.0.200928
+    environment:
+        - TOMCAT_AJP_MAX_THREADS=20
+        - TOMCAT_HTTP_MAX_THREADS=5
+        - TOMCAT_HEAP_XMS=128M
+        - TOMCAT_HEAP_XMX=1G
+        - LUMIS_DB_HOST=lumisportal.c7vikp2msoyi.us-east-2.rds.amazonaws.com
+        - LUMIS_DB_PORT=3306
+        - LUMIS_DB_USER=lumisportal
+        - LUMIS_DB_PASSWORD=lumisportal
+        - LUMIS_DB_NAME=lumisportal
+        - LUMIS_DB_MINIMUM_IDLE=10
+        - LUMIS_DB_MAXIMUM_POOL_SIZE=150
+        - ELASTICSEARCH_HOST=es01:9200,es02:9200,es03:9200
+        - ELASTICSEARCH_TRANSPORT_HOST=es01:9300,es02:9300,es03:9300
+        - ELASTICSEARCH_CLUSTER_NAME=lumisportal  
+        - WEB_ROOT_PATH=/usr/local/htdocs
+    volumes:
+        - type: volume 
+          source: es_analysis
+          target: /usr/share/elasticsearch/config/lumis-analysis            
+        - type: volume
+          source: lumis_shared
+          target: /usr/local/lumisportal/lumisdata/shared
+        - type: volume
+          source: htdocs
+          target: /usr/local/htdocs        
+    networks:
+        - net        
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=net"      
+      - "traefik.http.routers.lumisxp.rule=Host(`localhost`)"
+      - "traefik.http.routers.lumisxp.entrypoints=web"
+      - traefik.http.services.lumisxp.loadbalancer.server.port=8088
+      - traefik.http.services.lumisxp.loadbalancer.sticky=true
+      - traefik.http.services.lumisxp.loadbalancer.sticky.cookie.name=_traefik_session_id
+      - traefik.http.services.lumisxp.loadbalancer.sticky.cookie.httpOnly=true
+    depends_on:
+      - database      
+    deploy:
+        mode: replicated
+        replicas: 1
+        update_config:
+          parallelism: 1
+          delay: 10s
+        restart_policy:
+          condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
+  nginx:
+    image: jeduoliveira/labs:nginx-1.19.3-alpine       
+    ports: 
+        - 80:80
+    networks:
+        - net     
+    volumes:
+    - type: volume 
+      source: htdocs
+      target: /opt/htdocs
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+volumes:   
+    es_analysis:
+    lumis_shared:
+    htdocs:
+
+networks:
+  net:
+    external: true

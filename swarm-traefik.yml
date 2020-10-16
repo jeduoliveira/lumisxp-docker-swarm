@@ -1,0 +1,30 @@
+version: '3.0'
+
+services:
+  loadbalancer:
+    image: traefik:v2.3
+    command: 
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:8088"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080    
+    deploy:
+      restart_policy:
+        condition: any
+      mode: replicated
+      replicas: 1
+      update_config:
+        delay: 2s
+      placement:
+         constraints: [node.role == manager]
+    networks:
+      - net
+
+networks:
+    net:
+      external: true

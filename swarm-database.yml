@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+    database:
+        image: mysql:5.7
+        command: >
+            --default-authentication-plugin=mysql_native_password 
+            --max_allowed_packet=134217728
+        volumes:
+          - type: volume
+            source: mysql_data
+            target: /var/lib/mysql
+        environment: 
+          - MYSQL_ROOT_PASSWORD=87ti5ox6
+          - MYSQL_DATABASE=lumisportal
+          - MYSQL_USER=lumisportal
+          - MYSQL_PASSWORD=lumisportal  
+        networks:
+          - net
+        deploy:
+          restart_policy:
+            condition: any
+          mode: replicated
+          replicas: 1
+          placement:
+            constraints: [node.role == manager]
+        healthcheck:
+          test: mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD && test '0' -eq $$(ps aux | awk '{print $$11}' | grep -c -e '^mysql$$')
+volumes:
+    mysql_data:
+    
+networks:
+  net:
+    external: true

@@ -1,0 +1,30 @@
+---
+
+- name: Ensure NFS is installed.
+  package: 
+    name: nfs-utils 
+    state: installed
+
+- name: Ensure mount directory exists.
+  file:
+    path: "/data"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- debug:
+    msg: "{{ efs_path }}"
+
+- name: Ensure EFS volume is mounted.
+  mount:
+    name: /data
+    src: "{{ efs_path }}:/"
+    fstype: nfs4
+    opts: nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport
+    state: mounted
+
+
+  
+
+
