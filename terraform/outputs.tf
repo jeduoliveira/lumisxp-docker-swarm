@@ -1,6 +1,6 @@
-output "instances" {
-    value = data.aws_instances.instances.public_ips
-}
+#output "instances" {
+#    value = data.aws_instances.instances.public_ips
+#}
 
 output "aws_subnet_ids" {
     value = data.aws_subnet_ids.all.ids

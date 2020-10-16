@@ -10,11 +10,11 @@ variable "myip" {
 }
 
 variable "manager_instance_type" {
-  default = "t3.micro"
+  default = "t3.small"
 }
 
 variable "worker_instance_type" {
-  default = "t3.micro"
+  default = "t3.small"
 }
 
 variable "publickey" {
