@@ -30,7 +30,10 @@ push:
 	docker push jeduoliveira/labs:elasticsearch-7.9.2
 	docker push jeduoliveira/labs:lumisxp-12.5.0.200928
 	
-	
+pull:
+	docker pull jeduoliveira/labs:nginx-1.19.3-alpine
+	docker pull jeduoliveira/labs:elasticsearch-7.9.2
+	docker pull jeduoliveira/labs:lumisxp-12.5.0.200928
 
 ansible-run:
 	ansible-playbook -i ansible/inventory/hosts ansible/playbook.yml 

@@ -6,7 +6,7 @@ variable "aws_region" {
 
 variable "myip" {
   type    = string
-  default = "200.201.187.118/32"
+  default = "186.223.165.32/32"
 }
 
 variable "manager_instance_type" {
