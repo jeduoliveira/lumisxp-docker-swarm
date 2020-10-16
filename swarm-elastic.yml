@@ -22,10 +22,6 @@ services:
         target: /usr/share/elasticsearch/config/lumis-analysis     
     networks:
       - net
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
     deploy:            
       mode: "replicated"
       replicas: 1
@@ -57,10 +53,6 @@ services:
         target: /usr/share/elasticsearch/config/lumis-analysis     
     networks:
       - net
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
     deploy:            
       mode: "replicated"
       replicas: 1
@@ -98,10 +90,6 @@ services:
       resources:
         limits:
           memory: 1G
-      ulimits:
-        memlock:
-          soft: -1
-          hard: -1
       placement:
         constraints: [node.role == worker]
 
