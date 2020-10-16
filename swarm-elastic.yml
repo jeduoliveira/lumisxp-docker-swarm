@@ -25,9 +25,7 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      resources:
-        limits:
-          memory: 1G
+      
       placement:
         constraints: [node.role == worker]
 
@@ -56,9 +54,7 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      resources:
-        limits:
-          memory: 1G
+      
       placement:
         constraints: [node.role == worker]
 
@@ -87,9 +83,6 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      resources:
-        limits:
-          memory: 1G
       placement:
         constraints: [node.role == worker]
 
