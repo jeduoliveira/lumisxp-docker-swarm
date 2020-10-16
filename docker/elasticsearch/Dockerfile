@@ -10,5 +10,5 @@ RUN ${ES_HOME}/bin/elasticsearch-plugin install --batch analysis-icu
 RUN echo "*              soft    nofile      65535           "  >> /etc/security/limits.conf
 RUN echo "*              soft    nofile      65535           "  >> /etc/security/limits.conf
 
-
+RUN sysctl -w fs.file-max=65536
 RUN cat /etc/security/limits.conf
