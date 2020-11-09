@@ -1,10 +1,10 @@
 ---
 - name: Configurando Global
   hosts: all
-  gather_facts: false
+  gather_facts: False
   become: yes
   vars:
-    efs_path: "fs-8264f6fa.efs.us-east-2.amazonaws.com"
+    efs_path: "fs-7c82e504.efs.us-east-2.amazonaws.com"
   roles:
     - { role: common }
     - { role: efs }
@@ -13,7 +13,7 @@
 #  hosts: docker_swarm_manager
 #  become: yes
 #  vars: 
-#    docker_swarm_manager_ip: "10.0.4.5"
+#    docker_swarm_manager_ip: "10.0.4.203"
 #    docker_swarm_manager_port: "2377"
 #  roles:
 #    - manager
@@ -22,7 +22,7 @@
 #  hosts: docker_swarm_worker
 #  become: yes
 #  vars: 
-#    docker_swarm_manager_ip: "10.0.4.5"
+#    docker_swarm_manager_ip: "10.0.4.203"
 #    docker_swarm_manager_port: "2377"
 #  roles:
 #    - worker

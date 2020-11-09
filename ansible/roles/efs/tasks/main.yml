@@ -13,9 +13,6 @@
     group: root
     mode: 0755
 
-- debug:
-    msg: "{{ efs_path }}"
-
 - name: Ensure EFS volume is mounted.
   mount:
     name: /data

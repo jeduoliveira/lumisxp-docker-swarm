@@ -36,4 +36,10 @@ pull:
 	docker pull jeduoliveira/labs:lumisxp-12.5.0.200928
 
 ansible-run:
-	ansible-playbook -i ansible/inventory/hosts ansible/playbook.yml 
+	ansible-playbook -i ansible/inventory/hosts ansible/playbook.yml
+
+terraform-init:
+	cd terraform && terraform init  
+	cd terraform && terraform validate  
+	cd terraform && terraform plan 
+	cd terraform && terraform apply -auto-approve

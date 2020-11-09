@@ -23,6 +23,17 @@ resource "aws_security_group" "rds" {
 resource "aws_security_group" "swarm" {
     name   = "swarm"
     vpc_id = module.vpc.vpc_id
+    
+    
+    
+    ingress {
+        description = "Swarm Cluster"
+        from_port   = 0
+        to_port     = 2377
+        protocol    = "tcp"
+        cidr_blocks = ["10.0.0.0/16"]
+    }
+
     ingress {
         description = "Elasticsearch"
         from_port   = 0

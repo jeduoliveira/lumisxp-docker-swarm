@@ -15,6 +15,19 @@ Para criar um cluster do LumisXP é necessário ter a licença da versão enterp
 
 2. Colocar a sua versão do enterprise LumisXP no diretorio docker/lumisxp/packages
 
+
+Criar o ambiente na AWS
+---
+1.  Configurar a credencial de acesso
+     
+    1.1. Acessar o console da AWS e criar um IAM 
+
+    1.2. Definir um profile "demo" da AWS
+
+        aws configure --profile demo
+
+2. Terraform
+
 3. Criar o network externo para o traefik fazer o discovery das instancias.
 
         docker network create -d overlay net

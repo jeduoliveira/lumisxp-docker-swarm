@@ -2,6 +2,7 @@
 provider "aws" {
   version = ">= 2.28.1"
   region  = var.aws_region
+  profile = "demo"
 }
 
 resource "aws_key_pair" "swarm_demo" {
@@ -12,7 +13,7 @@ resource "aws_key_pair" "swarm_demo" {
 module "manager" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
-  instance_count              = var.instance_count
+  instance_count              = var.instance_manager_count
   key_name                    = aws_key_pair.swarm_demo.key_name
   name                        = "Manager"
   ami                         = lookup(var.ami,var.aws_region)
@@ -32,7 +33,7 @@ module "manager" {
 module "worker" {
   source  = "terraform-aws-modules/ec2-instance/aws"
 
-  instance_count              = var.instance_count
+  instance_count              = var.instance_worker_count
   key_name                    = aws_key_pair.swarm_demo.key_name
   name                        = "Worker"
   ami                         = lookup(var.ami,var.aws_region)

@@ -3,10 +3,9 @@ variable "aws_region" {
   default = "us-east-2"
 }
 
-
 variable "myip" {
   type    = string
-  default = "186.223.165.32/32"
+  default = "200.201.187.118/32"
 }
 
 variable "manager_instance_type" {
@@ -20,8 +19,13 @@ variable "worker_instance_type" {
 variable "publickey" {
   default = "../.ssh/swarm-demo.pub"
 }
-variable "instance_count" {
+
+variable "instance_worker_count" {
     default = "3"
+}
+
+variable "instance_manager_count" {
+    default = "1"
 }
 
 variable "subnet_count" {

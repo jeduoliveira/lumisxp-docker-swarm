@@ -1,21 +1,15 @@
-
-node-1 ansible_ssh_host=52.14.167.197   ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
-node-2 ansible_ssh_host=18.222.250.67     ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
-node-3 ansible_ssh_host=18.188.20.73     ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
-node-4 ansible_ssh_host=18.189.188.139  ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
-node-5 ansible_ssh_host=3.14.68.198  ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
-node-6 ansible_ssh_host=3.129.19.53  ansible_user=ec2-user ansible_ssh_private_key_file=.ssh/swarm-demo.pem
+manager-1 ansible_ssh_host=3.129.71.12   
+worker-1 ansible_ssh_host=18.221.2.67  
+worker-2 ansible_ssh_host=3.139.56.90  
+worker-3 ansible_ssh_host=18.221.216.96 
 
 [docker_swarm_manager]
-node-1
-node-2
-node-3
+manager-1
 
 [docker_swarm_worker]
-node-4
-node-5
-node-6
-
+worker-1
+worker-2
+worker-3
 
 
 

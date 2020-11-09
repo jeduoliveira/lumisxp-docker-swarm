@@ -42,7 +42,7 @@ resource "aws_lb_target_group" "tg" {
 
 
 resource "aws_lb_target_group_attachment" "tg_att" {
-  count         = var.instance_count
+  count         = var.instance_manager_count
   target_group_arn = aws_lb_target_group.tg.arn
   target_id        =  element(data.aws_instances.managers.ids, count.index)
   port             = 80

@@ -1,10 +1,6 @@
 
 data "aws_availability_zones" "available" {}
 
-data "aws_subnet_ids" "all" {
-  vpc_id = module.vpc.vpc_id
-}
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
