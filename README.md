@@ -25,7 +25,6 @@ Para criar um cluster do LumisXP é necessário ter a licença da versão enterp
         
             make build
 
-
     4.2. Deploy do MySQL 
 
             make deploy-database
@@ -37,6 +36,10 @@ Para criar um cluster do LumisXP é necessário ter a licença da versão enterp
     4.4. Deploy do LumisXP 
     
             make deploy-lumis
+            
+    4.4.1. Acompanhe o Log do service para verificar o andamento da criação das tabelas e os dados iniciais.}
+
+            docker service logs lumisxp_lumisportal -f 
 
     4.5. Deploy do traefik 
     
@@ -45,7 +48,6 @@ Para criar um cluster do LumisXP é necessário ter a licença da versão enterp
 5. Escalando o lumisxp service
 
         docker service scale lumisxp_lumisportal=2
-
 
 
 Utilizando o Labs Play With Docker
