@@ -25,9 +25,8 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      
-      placement:
-        constraints: [node.role == worker]
+      #placement:
+      #  constraints: [node.role == worker]
 
   es02:
     image: jeduoliveira/labs:elasticsearch-7.9.2
@@ -54,9 +53,8 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      
-      placement:
-        constraints: [node.role == worker]
+      #placement:
+      #  constraints: [node.role == worker]
 
   es03:
     image: jeduoliveira/labs:elasticsearch-7.9.2
@@ -83,8 +81,8 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      placement:
-        constraints: [node.role == worker]
+      #placement:
+      #  constraints: [node.role == worker]
 
   kib01:
     image: docker.elastic.co/kibana/kibana:7.9.2
@@ -104,8 +102,8 @@ services:
     deploy:            
       mode: "replicated"
       replicas: 1
-      placement:
-        constraints: [node.role == manager]
+      #placement:
+      #  constraints: [node.role == manager]
 
 volumes:
   data01:    
