@@ -7,10 +7,13 @@ deploy-database:
 deploy-lumis:
 	docker stack deploy --compose-file swarm-lumis.yml lumisxp
 
+deploy-nginx:
+	docker stack deploy --compose-file swarm-nginx.yml lumisxp
+
 deploy-traefik:
 	docker stack deploy --compose-file swarm-traefik.yml lumisxp
 
-deploy: deploy-elastic deploy-database deploy-lumis
+deploy: deploy-database deploy-elastic deploy-lumis deploy-traefik deploy-nginx
 
 build-nginx:
 	cd docker/nginx && docker build -t jeduoliveira/labs:nginx-1.19.3-alpine .

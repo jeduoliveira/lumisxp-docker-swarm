@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  nginx:
+    image: jeduoliveira/labs:nginx-1.19.3-alpine       
+    ports: 
+        - 80:80
+    networks:
+        - net     
+    volumes:
+    - type: volume 
+      source: htdocs
+      target: /opt/htdocs
+    deploy:
+      mode: replicated
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+volumes:   
+    es_analysis:
+    htdocs:
+
+networks:
+  net:
+    external: true
