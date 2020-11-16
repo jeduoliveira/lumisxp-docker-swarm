@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  lumisportal:
+  lumisxp:
     image: jeduoliveira/labs:lumisxp-12.5.0.200928
     environment:
         - TOMCAT_AJP_MAX_THREADS=20
