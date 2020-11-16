@@ -33,7 +33,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=net"      
-      - "traefik.http.routers.lumisxp.rule=Host(`localhost`)"
+      - "traefik.http.routers.lumisxp.rule=Host(`lumisxp`)"
       - "traefik.http.routers.lumisxp.entrypoints=web"
       - traefik.http.services.lumisxp.loadbalancer.server.port=8088
       - traefik.http.services.lumisxp.loadbalancer.sticky=true
