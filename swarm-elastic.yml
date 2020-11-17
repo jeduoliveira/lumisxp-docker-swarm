@@ -9,7 +9,7 @@ services:
       - discovery.seed_hosts=es02,es03
       - cluster.initial_master_nodes=es01,es02,es03      
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      - network.host=0.0.0.0
       - action.auto_create_index=-lumisportal-*,+* 
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000      
@@ -37,7 +37,7 @@ services:
       - discovery.seed_hosts=es01,es03
       - cluster.initial_master_nodes=es01,es02,es03      
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      - network.host=0.0.0.0
       - action.auto_create_index=-lumisportal-*,+* 
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000
@@ -65,7 +65,7 @@ services:
       - discovery.seed_hosts=es01,es02
       - cluster.initial_master_nodes=es01,es02,es03      
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      - network.host=0.0.0.0
       - action.auto_create_index=-lumisportal-*,+* 
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000
