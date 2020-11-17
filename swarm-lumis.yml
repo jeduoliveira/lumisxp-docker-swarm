@@ -37,8 +37,8 @@ services:
       - "traefik.http.routers.lumisxp.entrypoints=web"
       - traefik.http.services.lumisxp.loadbalancer.server.port=8088
       - traefik.http.services.lumisxp.loadbalancer.sticky=true
-      #- traefik.http.services.lumisxp.loadbalancer.sticky.cookie.name=_traefik_session_id
-      #- traefik.http.services.lumisxp.loadbalancer.sticky.cookie.httpOnly=true
+      - traefik.http.services.lumisxp.loadbalancer.sticky.cookie.name=_traefik_session_id
+      - traefik.http.services.lumisxp.loadbalancer.sticky.cookie.httpOnly=true
     depends_on:
       - database      
     ports:
@@ -53,12 +53,12 @@ services:
           condition: on-failure
         placement:
           constraints: [node.role == worker]
-    #healthcheck:
-    #  test: ["CMD", "curl", "-f", "http://localhost:8088"]
-    #  interval: 1m30s
-    #  timeout: 10s
-    #  retries: 10
-    #  start_period: 40s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
 
 volumes:   
     es_analysis:
