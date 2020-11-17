@@ -77,7 +77,11 @@
     - { limit_type: 'soft', limit_item: 'memlock', value: unlimited }
     - { limit_type: 'hard', limit_item: 'memlock', value: unlimited }
 
-
+- name: copied template docker
+  template:
+    src: "sysconfig/docker.j2"
+    dest: "/etc/sysconfig/docker"
+  notify: restart docker
   
 - name: reload settings from all system configuration files
   shell: sysctl --system
