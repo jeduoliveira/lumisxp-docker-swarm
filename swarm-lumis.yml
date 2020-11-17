@@ -7,7 +7,7 @@ services:
         - TOMCAT_HTTP_MAX_THREADS=5
         - TOMCAT_HEAP_XMS=128M
         - TOMCAT_HEAP_XMX=1G
-        - LUMIS_DB_HOST=database
+        - LUMIS_DB_HOST=lumisportal.c7vikp2msoyi.us-east-2.rds.amazonaws.com
         - LUMIS_DB_PORT=3306
         - LUMIS_DB_USER=lumisportal
         - LUMIS_DB_PASSWORD=lumisportal
@@ -19,14 +19,14 @@ services:
         - ELASTICSEARCH_CLUSTER_NAME=lumisportal  
         - WEB_ROOT_PATH=/usr/local/htdocs
     volumes:
-        - type: volume 
-          source: es_analysis
+        - type: bind 
+          source: /data/elasticsearch/config/lumis-analysis
           target: /usr/share/elasticsearch/config/lumis-analysis            
-        - type: volume
-          source: lumis_shared
+        - type: bind
+          source: /data/lumisportal/lumisdata/shared
           target: /usr/local/lumisportal/lumisdata/shared
-        - type: volume
-          source: htdocs
+        - type: bind
+          source: /data/htdocs
           target: /usr/local/htdocs        
     networks:
         - net        
@@ -60,10 +60,10 @@ services:
       retries: 10
       start_period: 40s
 
-volumes:   
-    es_analysis:
-    lumis_shared:
-    htdocs:
+#volumes:   
+#    es_analysis:
+#    lumis_shared:
+#    htdocs:
 
 networks:
   net:

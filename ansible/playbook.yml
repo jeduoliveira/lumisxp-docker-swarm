@@ -4,7 +4,7 @@
   gather_facts: False
   become: yes
   vars:
-    efs_path: "fs-7c82e504.efs.us-east-2.amazonaws.com"
+    efs_path: "fs-bac6a6c2.efs.us-east-2.amazonaws.com"
   roles:
     - { role: common }
     - { role: efs }

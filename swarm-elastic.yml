@@ -14,11 +14,11 @@ services:
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000      
     volumes:
-      - type: volume 
-        source: data01
+      - type: bind 
+        source: /data/elasticsearch/data01
         target: /usr/share/elasticsearch/data
-      - type: volume 
-        source: es_analysis
+      - type: bind 
+        source: /data/elasticsearch/config/lumis-analysis
         target: /usr/share/elasticsearch/config/lumis-analysis     
     networks:
       - net
@@ -42,11 +42,11 @@ services:
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000
     volumes:
-      - type: volume 
-        source: data02
+      - type: bind 
+        source: /data/elasticsearch/data02
         target: /usr/share/elasticsearch/data
-      - type: volume 
-        source: es_analysis
+      - type: bind 
+        source: /data/elasticsearch/config/lumis-analysis
         target: /usr/share/elasticsearch/config/lumis-analysis     
     networks:
       - net
@@ -70,11 +70,11 @@ services:
       - search.max_buckets=30000
       - search.max_open_scroll_context=100000
     volumes:
-      - type: volume 
-        source: data03
+      - type: bind 
+        source: /data/elasticsearch/data03
         target: /usr/share/elasticsearch/data
-      - type: volume 
-        source: es_analysis
+      - type: bind 
+        source: /data/elasticsearch/config/lumis-analysis
         target: /usr/share/elasticsearch/config/lumis-analysis      
     networks:
       - net
@@ -105,11 +105,11 @@ services:
       placement:
         constraints: [node.role == manager]
 
-volumes:
-  data01:    
-  data02:    
-  data03:
-  es_analysis:
+#volumes:
+#  data01:    
+#  data02:    
+#  data03:
+#  es_analysis:
 
 networks:
   net:

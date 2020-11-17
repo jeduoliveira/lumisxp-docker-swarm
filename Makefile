@@ -43,6 +43,5 @@ ansible-run:
 
 terraform-init:
 	cd terraform && terraform init  
-	cd terraform && terraform validate  
-	cd terraform && terraform plan 
+	cd terraform && terraform apply -target=module.vpc  -auto-approve
 	cd terraform && terraform apply -auto-approve

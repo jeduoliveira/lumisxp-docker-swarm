@@ -7,8 +7,8 @@ services:
     networks:
         - net     
     volumes:
-    - type: volume 
-      source: htdocs
+    - type: bind 
+      source: /data/htdocs
       target: /opt/htdocs
     deploy:
       mode: replicated
@@ -20,9 +20,8 @@ services:
         condition: on-failure
       placement:
         constraints: [node.role == manager]
-volumes:   
-    es_analysis:
-    htdocs:
+#volumes:   
+#    htdocs:
 
 networks:
   net:
