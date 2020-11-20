@@ -1,28 +1,29 @@
 ---
 - name: Configurando Global
   hosts: all
-  gather_facts: False
-  become: yes
+  gather_facts: True
+  become: True
   vars:
-    efs_path: "fs-bac6a6c2.efs.us-east-2.amazonaws.com"
+    nfs_exports: "*(rw,sync,no_root_squash,no_all_squash)"
+  #  efs_path: "fs-da3556a2.efs.us-east-2.amazonaws.com"
   roles:
     - { role: common }
-    - { role: efs }
+    - { role: geerlingguy.docker }
 
-#- name: Configurando Managers
-#  hosts: docker_swarm_manager
-#  become: yes
-#  vars: 
-#    docker_swarm_manager_ip: "10.0.4.203"
-#    docker_swarm_manager_port: "2377"
-#  roles:
-#    - manager
-#
-#- name: Configurando Workers
-#  hosts: docker_swarm_worker
-#  become: yes
-#  vars: 
-#    docker_swarm_manager_ip: "10.0.4.203"
-#    docker_swarm_manager_port: "2377"
-#  roles:
-#    - worker
+
+- name: NSF Server
+  hosts: manager
+  gather_facts: False
+  become: True
+  roles:
+    - { role: nfs-server }
+
+- name: NSF Client
+  hosts: workers
+  gather_facts: False
+  become: True
+  vars:
+    server_master_ip: 192.168.50.10
+  roles:
+    - { role: nfs-client }
+    

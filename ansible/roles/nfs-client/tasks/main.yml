@@ -1,0 +1,23 @@
+- name: created lumis www directory
+  file:
+    path: "/data"
+    mode: 0755
+    state: directory
+
+- name: Ensure a list of yum packages are installed
+  yum:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+    - nfs-utils
+
+- name: Ensure EFS volume is mounted.
+  mount:
+    name: "{{ path_shared }}"
+    src: "{{server_master_ip}}:{{ path_shared }}"
+    fstype: nfs
+    state: mounted
+
+

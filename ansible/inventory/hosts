@@ -1,19 +1,9 @@
-manager-1 ansible_ssh_host=3.21.244.125  
-worker-1 ansible_ssh_host=3.139.85.234
-worker-2 ansible_ssh_host=18.222.24.160 
-worker-3 ansible_ssh_host=3.16.213.187
+manager ansible_ssh_host=192.168.50.10  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/manager/virtualbox/private_key
+worker1 ansible_ssh_host=192.168.50.11  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker1/virtualbox/private_key
+worker2 ansible_ssh_host=192.168.50.12  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker2/virtualbox/private_key
+worker3 ansible_ssh_host=192.168.50.13  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker3/virtualbox/private_key
 
-[docker_swarm_manager]
-manager-1
-
-[docker_swarm_worker]
-worker-1
-worker-2
-worker-3
-
-
-
-
-
-
-
+[workers]
+worker1
+worker2
+worker3

@@ -1,0 +1,34 @@
+- name: created lumis www directory
+  file:
+    path: "/data"
+    mode: 0755
+    state: directory
+
+- name: Ensure a list of yum packages are installed
+  yum:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+    - nfs-utils
+
+- name: start and enable nfs
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - rpcbind
+    - nfs-server
+    - nfs-lock
+    - nfs-idmap
+
+- name: Copy exports file.
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nfs
