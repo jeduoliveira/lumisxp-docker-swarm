@@ -3,7 +3,7 @@ deploy-elastic:
 deploy-net:
 	docker network create -d overlay net
 
-deploy-database: deploy-net
+deploy-database: 
 	docker stack deploy --compose-file swarm-database.yml lumisxp
 
 deploy-lumis:
