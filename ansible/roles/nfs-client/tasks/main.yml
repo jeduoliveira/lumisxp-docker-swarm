@@ -1,7 +1,7 @@
 - name: created lumis www directory
   file:
-    path: "/data"
-    mode: 0755
+    path: "{{ path_shared }}"
+    mode: 0777
     state: directory
 
 - name: Ensure a list of yum packages are installed

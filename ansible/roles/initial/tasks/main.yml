@@ -1,0 +1,37 @@
+---
+- name: creating source directory"
+  file:
+    path: "~/lumisxp-docker-swarm"
+    state: directory    
+    recurse: yes
+  become: yes
+
+- file:
+    path: "~/lumisxp-docker-swarm"
+    mode: 0777
+    state: directory
+  become: yes
+
+- name: cloning repo
+  git:
+    repo: "https://github.com/jeduoliveira/lumisxp-docker-swarm"
+    version: "master"
+    dest: "~/lumisxp-docker-swarm"
+    accept_hostkey: yes
+    force: yes
+
+- name: cloning repo
+  shell: "cd ~/lumisxp-docker-swarm && make pull"
+
+- name: created lumis www directory
+  file:
+    path: "{{ item }}"
+    mode: 0777
+    state: directory
+  with_items:
+    - /data/elasticsearch/data01
+    - /data/elasticsearch/data02
+    - /data/elasticsearch/data03
+    - /data/elasticsearch/config/lumis-analysis
+    - /data/htdocs
+    - /data/lumisportal/lumisdata/shared

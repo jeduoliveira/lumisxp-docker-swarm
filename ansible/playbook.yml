@@ -13,10 +13,14 @@
 
 - name: NSF Server
   hosts: manager
-  gather_facts: False
+  gather_facts: True
   become: True
+  vars:
+    docker_swarm_manager_ip: 192.168.50.10
+    docker_swarm_manager_port: 2377
   roles:
     - { role: nfs-server }
+    - { role: manager }
 
 - name: NSF Client
   hosts: workers
@@ -26,4 +30,11 @@
     server_master_ip: 192.168.50.10
   roles:
     - { role: nfs-client }
+  
+- name: Configurando Global
+  hosts: all
+  gather_facts: True
+  become: True
+  roles:
+    - { role: initial }
     

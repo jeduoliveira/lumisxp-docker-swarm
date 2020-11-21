@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos/7"
 
   boxes = [
-    { :name => "manager",           :ip => "192.168.50.10", :memory => 512 },
+    { :name => "manager",           :ip => "192.168.50.10", :memory => 1256 },
     { :name => "worker1",           :ip => "192.168.50.11", :memory => 1256 },
     { :name => "worker2",           :ip => "192.168.50.12", :memory => 1256 },
     { :name => "worker3",           :ip => "192.168.50.13", :memory => 1256 },

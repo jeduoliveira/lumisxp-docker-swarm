@@ -1,7 +1,9 @@
 deploy-elastic:
 	docker stack deploy --compose-file swarm-elastic.yml lumisxp
+deploy-net:
+	docker network create -d overlay net
 
-deploy-database:
+deploy-database: deploy-net
 	docker stack deploy --compose-file swarm-database.yml lumisxp
 
 deploy-lumis:
@@ -39,6 +41,7 @@ pull:
 	docker pull jeduoliveira/labs:lumisxp-12.5.0.200928
 
 ansible-run:
+	vagrant up 
 	ansible-playbook -i ansible/inventory/hosts ansible/playbook.yml
 
 terraform-init:

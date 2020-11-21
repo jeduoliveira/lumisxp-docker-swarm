@@ -38,5 +38,3 @@
     dest: "/etc/sysconfig/docker"
   notify: restart docker
   
-- name: reload settings from all system configuration files
-  shell: sysctl --system
