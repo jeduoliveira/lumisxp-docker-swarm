@@ -5,11 +5,9 @@
   become: True
   vars:
     nfs_exports: "*(rw,sync,no_root_squash,no_all_squash)"
-  #  efs_path: "fs-da3556a2.efs.us-east-2.amazonaws.com"
   roles:
     - { role: common }
     - { role: geerlingguy.docker }
-
 
 - name: NSF Server
   hosts: manager

@@ -1,4 +1,17 @@
 ---
+- name: created lumis www directory
+  file:
+    path: "{{ item }}"
+    mode: 0777
+    state: directory
+  with_items:
+    - /data/elasticsearch/data01
+    - /data/elasticsearch/data02
+    - /data/elasticsearch/data03
+    - /data/elasticsearch/config/lumis-analysis
+    - /data/htdocs
+    - /data/lumisportal/lumisdata/shared 
+
 - name: creating source directory"
   file:
     path: "~/lumisxp-docker-swarm"
@@ -21,17 +34,4 @@
     force: yes
 
 - name: cloning repo
-  shell: "cd ~/lumisxp-docker-swarm && make pull"
-
-- name: created lumis www directory
-  file:
-    path: "{{ item }}"
-    mode: 0777
-    state: directory
-  with_items:
-    - /data/elasticsearch/data01
-    - /data/elasticsearch/data02
-    - /data/elasticsearch/data03
-    - /data/elasticsearch/config/lumis-analysis
-    - /data/htdocs
-    - /data/lumisportal/lumisdata/shared
+  shell: "cd ~/lumisxp-docker-swarm && make pull && make deploy-database && make deploy-elastic"
