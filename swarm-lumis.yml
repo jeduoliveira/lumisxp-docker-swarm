@@ -33,7 +33,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=net"      
-      - "traefik.http.routers.lumisxp.rule=Host(`ip172-18-0-56-bupd5l7p2ffg00fp64l0-80.direct.labs.play-with-docker.com`)"
+      - "traefik.http.routers.lumisxp.rule=Host(`192.168.50.10`)"
       - "traefik.http.routers.lumisxp.entrypoints=web"
       - traefik.http.services.lumisxp.loadbalancer.server.port=8088
       - traefik.http.services.lumisxp.loadbalancer.sticky=true
