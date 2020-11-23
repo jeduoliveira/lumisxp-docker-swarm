@@ -123,7 +123,7 @@
 	<!-- Uncomment to enable customized error page (relative to frameworkUrl).
 	<errorPage>customizedErrorPage.jsp</errorPage>
 	-->
-<cluster>
+<!--cluster>
 	<config>		
 		<TCP  bind_addr="JGROUPS_EXTERNAL_ADDR" 
 	     
@@ -143,15 +143,15 @@
 		<lumis.portal.cluster.multiserver.Sequencer />
 	</config>
 </cluster>
-	<!-- Uncomment to enable multi-server clustering. Confirm that the serverId above is unique for each server.
+	
 	<cluster>
 		<multicast>
 			<mcastAddress>231.12.21.132</mcastAddress>
 			<mcastPort>45566</mcastPort>
-			<bindAddress>127.0.0.1</bindAddress>
+			<bindAddress>JGROUPS_EXTERNAL_ADDR</bindAddress>
 		</multicast>
-	</cluster>
-	-->
+	</cluster-->
+	
 
 	<!-- Uncomment to configure IExecutorManager properties.
 	<executor>
