@@ -8,9 +8,9 @@
     - /data/lumisxp_data01
     - /data/lumisxp_data02
     - /data/lumisxp_data03
-    - /data/es_analysis
-    - /data/htdocs
-    - /data/lumis_shared
+    - /data/lumisxp_es_analysis
+    - /data/lumisxp_htdocs
+    - /data/lumisxp_lumis_shared
 
 - name: Create symbolic link 
   file:
@@ -21,9 +21,9 @@
     - lumisxp_data01
     - lumisxp_data02
     - lumisxp_data03
-    - es_analysis
-    - htdocs
-    - lumis_shared
+    - lumisxp_es_analysis
+    - lumisxp_htdocs
+    - lumisxp_lumis_shared
 
 - name: creating source directory"
   file:
