@@ -28,8 +28,11 @@
   become: True
   vars:
     server_master_ip: 192.168.50.10
+    docker_swarm_manager_ip: 192.168.50.10
+    docker_swarm_manager_port: 2377
   roles:
     - { role: nfs-client }
+    - { role: worker }
   
 - name: Configurando Global
   hosts: all

@@ -25,8 +25,29 @@ services:
             constraints: [node.role == manager]
         healthcheck:
           test: mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD && test '0' -eq $$(ps aux | awk '{print $$11}' | grep -c -e '^mysql$$')
+
+portainer:
+    container_name: portainer
+    image: portainer/portainer:1.24.1
+    ports:
+      - 9010:9000
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks: net
+    deploy:
+          restart_policy:
+            condition: any
+          mode: replicated
+          replicas: 1
+          placement:
+            constraints: [node.role == manager]
+
 volumes:
     mysql_data:
+    portainer_data:
     
 networks:
   net:
