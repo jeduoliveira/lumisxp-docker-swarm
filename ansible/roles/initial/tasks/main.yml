@@ -5,12 +5,25 @@
     mode: 0777
     state: directory
   with_items:
-    - /data/elasticsearch/data01
-    - /data/elasticsearch/data02
-    - /data/elasticsearch/data03
-    - /data/elasticsearch/config/lumis-analysis
+    - /data/lumisxp_data01
+    - /data/lumisxp_data02
+    - /data/lumisxp_data03
+    - /data/es_analysis
     - /data/htdocs
-    - /data/lumisportal/lumisdata/shared 
+    - /data/lumis_shared
+
+- name: Create symbolic link 
+  file:
+   src: "/data/{{ item }}/"
+   dest: "/var/lib/docker/volumes/{{ item }}"
+   state: link
+  with_items:
+    - lumisxp_data01
+    - lumisxp_data02
+    - lumisxp_data03
+    - es_analysis
+    - htdocs
+    - lumis_shared
 
 - name: creating source directory"
   file:
