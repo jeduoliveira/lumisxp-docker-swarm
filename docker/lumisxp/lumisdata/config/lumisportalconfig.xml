@@ -125,7 +125,7 @@
 	-->
 <cluster>
 	<config>		
-		<TCP  bind_addr="JGROUPS_EXTERNAL_ADDR" 
+		<TCP   bind_addr="match-interface:eth0,match-interface:en0,site-local"
 	     
 		bind_port="50001" port_range="0" recv_buf_size="500000" send_buf_size="500000" />
 
