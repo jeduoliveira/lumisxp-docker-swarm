@@ -19,14 +19,14 @@ services:
         - ELASTICSEARCH_CLUSTER_NAME=lumisportal  
         - WEB_ROOT_PATH=/usr/local/htdocs
     volumes:
-        - type: bind 
-          source: /data/elasticsearch/config/lumis-analysis
+        - type: volume 
+          source: es_analysis
           target: /usr/share/elasticsearch/config/lumis-analysis            
-        - type: bind
-          source: /data/lumisportal/lumisdata/shared
+        - type: volume
+          source: lumis_shared
           target: /usr/local/lumisportal/lumisdata/shared
-        - type: bind
-          source: /data/htdocs
+        - type: volume
+          source: htdocs
           target: /usr/local/htdocs        
     networks:
         - net        
@@ -60,10 +60,10 @@ services:
       retries: 10
       start_period: 40s
 
-#volumes:   
-#    es_analysis:
-#    lumis_shared:
-#    htdocs:
+volumes:   
+    es_analysis:
+    lumis_shared:
+    htdocs:
 
 networks:
   net:
