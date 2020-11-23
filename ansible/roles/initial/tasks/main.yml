@@ -34,4 +34,4 @@
     force: yes
 
 - name: cloning repo
-  shell: "cd ~/lumisxp-docker-swarm && make pull && make deploy-database && make deploy-elastic"
+  shell: "cd ~/lumisxp-docker-swarm && make pull"
