@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   nginx:
-    image: jeduoliveira/labs:nginx-1.19.3-alpine       
+    image: jeduoliveira/labs:apache      
     ports: 
         - 80:80
     networks:
