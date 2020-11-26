@@ -6,7 +6,7 @@ services:
         - TOMCAT_AJP_MAX_THREADS=20
         - TOMCAT_HTTP_MAX_THREADS=5
         - TOMCAT_HEAP_XMS=128M
-        - TOMCAT_HEAP_XMX=1G
+        - TOMCAT_HEAP_XMX=512M
         - LUMIS_DB_HOST=database
         - LUMIS_DB_PORT=3306
         - LUMIS_DB_USER=lumisportal
@@ -51,8 +51,7 @@ services:
           delay: 10s
         restart_policy:
           condition: on-failure
-        placement:
-          constraints: [node.role == worker]
+        
     healthcheck:
       test: wget --quiet --tries=1
       interval: 30s

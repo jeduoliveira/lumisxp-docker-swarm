@@ -1,12 +1,18 @@
-manager ansible_ssh_host=192.168.50.10  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/manager/virtualbox/private_key
-worker1 ansible_ssh_host=192.168.50.11  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker1/virtualbox/private_key
-worker2 ansible_ssh_host=192.168.50.12  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker2/virtualbox/private_key
-worker3 ansible_ssh_host=192.168.50.13  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker3/virtualbox/private_key
+manager1 ansible_ssh_host=192.168.50.10  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/manager1/virtualbox/private_key
+manager2 ansible_ssh_host=192.168.50.11  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/manager2/virtualbox/private_key
+manager3 ansible_ssh_host=192.168.50.12  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/manager3/virtualbox/private_key
+worker1 ansible_ssh_host=192.168.50.13  ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/worker1/virtualbox/private_key
 
 [docker_swarm_manager]
-manager
+manager1
+manager2
+manager3
 
 [workers]
 worker1
-worker2
-worker3
+
+
+[nfsclients]
+manager2
+manager3
+worker1

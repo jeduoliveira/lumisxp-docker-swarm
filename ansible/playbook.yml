@@ -1,5 +1,5 @@
 ---
-- name: Configurando Global
+- name: Start Config
   hosts: all
   gather_facts: True
   become: True
@@ -9,19 +9,16 @@
     - { role: common }
     - { role: geerlingguy.docker }
 
-- name: NSF Server
-  hosts: manager
+- name: NFS Server
+  hosts: manager1
   gather_facts: True
   become: True
-  vars:
-    docker_swarm_manager_ip: 192.168.50.10
-    docker_swarm_manager_port: 2377
+  
   roles:
     - { role: nfs-server }
-    - { role: manager }
-
+    
 - name: NSF Client
-  hosts: workers
+  hosts: nfsclients
   gather_facts: False
   become: True
   vars:
@@ -30,9 +27,28 @@
     docker_swarm_manager_port: 2377
   roles:
     - { role: nfs-client }
+    
+- name: Swarm Managers
+  hosts: docker_swarm_manager
+  gather_facts: True
+  become: True
+  vars:
+    docker_swarm_manager_ip: 192.168.50.10
+    docker_swarm_manager_port: 2377
+  roles:
+    - { role: manager }
+
+- name: Swarm Workers
+  hosts: workers
+  gather_facts: False
+  become: True
+  vars:
+    docker_swarm_manager_ip: 192.168.50.10
+    docker_swarm_manager_port: 2377
+  roles:
     - { role: worker }
   
-- name: Configurando Global
+- name: Initial Config
   hosts: all
   gather_facts: True
   become: True
