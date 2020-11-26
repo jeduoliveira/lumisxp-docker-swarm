@@ -12,13 +12,14 @@ services:
       target: /opt/htdocs
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
       update_config:
         parallelism: 1
         delay: 10s
       restart_policy:
         condition: on-failure
-     
+      placement:
+        constraints: [node.role == manager]
 volumes:   
     htdocs:
 
